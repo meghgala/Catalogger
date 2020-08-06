@@ -13,7 +13,7 @@ def login_page():
 
 @mod.route("/register_user",methods=["POST"])
 def reg_page():
-    user_id = createStudentAccount(request.form['name'],request.form['email'],request.form['pass'])
+    user_id = createStudentAccount(request.form['name'],request.form['email'],request.form['pass'],request.form['bname'],request.form['category'],request.form['own'],)
     print(user_id)
     return "success"
 
