@@ -6,20 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Connect Plus</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/mdi/css/materialdesignicons.min.css') }}">
-    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/mdi/css/materialdesignicons.min.css')}}" type="text/css">
+
+    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/flag-icon-css/css/flag-icon.min.css') }}" type="text/css">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/css/vendor.bundle.base.css') }}" type="text/css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/select2/select2.min.css') }}">
-    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href= "{{ url_for('static', filename='css/style.css)}}">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/select2/select2.min.css') }}" type="text/css">
+    <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}" type="text/css">
+
+    <link rel="stylesheet" href= "{{ url_for('static', filename='css/style.css')}}" type="text/css">
+
   </head>
   <body>
     <div class="container-scroller">
@@ -506,9 +503,10 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js                    "{{ url_for('static', filename='css/style.css)}}"   -->
-
+   
+  </body>
+  
+    
     <script src="{{ url_for('static', filename='vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -525,5 +523,4 @@
     <script src= "{{ url_for('static', filename='js/typeahead.js')}}"></script>
     <script src= "{{ url_for('static', filename='js/select2.js')}}"></script>
     <!-- End custom js for this page -->
-  </body>
 </html>
