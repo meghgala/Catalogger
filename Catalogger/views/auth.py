@@ -9,9 +9,13 @@ mod = Blueprint('auth', __name__, url_prefix='')
 
 @mod.route("/")
 def login_page():
-    if 'uid' in session:
-        return render_template('index.html',name=session['name'])
-    return render_template('auth/login.html')
+    return render_template('form/basic_elements.html')
+
+@mod.route("/register_user",methods=["POST"])
+def reg_page():
+    user_id = createStudentAccount(request.form['name'],request.form['email'],request.form['pass'])
+    print(user_id)
+    return "success"
 
 @mod.route("/changePassword")
 def change_password():
@@ -44,6 +48,7 @@ def login_user():
             session.permanent = False
         return redirect('/home')
     flash('Incorrect Credentials','danger')
+    print("hello")
     return redirect('/')
 
 @mod.route("/logout")

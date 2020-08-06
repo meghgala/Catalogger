@@ -8,7 +8,7 @@ class Config(object):
     IMAGE_UPLOADS = 'SalesTrackerV2/static/Products/'
     IMAGE_THUMBNAIL_UPLOADS = 'SalesTrackerV2/static/Products_Thumbnails/'
     ALLOWED_IMAGE_EXTENSIONS = ["JPEG", "JPG", "PNG"]
-    FIRESTORE_KEY_PATH = 'Catalogger/static/catalogger-key'
+    FIRESTORE_KEY_PATH = 'Catalogger/static/catalogger-key.json'
 
 
 class ProductionConfig(Config):
@@ -23,7 +23,7 @@ class DevelopmentConfig(Config):
     IMAGE_THUMBNAIL_UPLOADS = 'SalesTrackerV2/static/Products_Thumbnails/'
     ALLOWED_IMAGE_EXTENSIONS = ["JPEG", "JPG", "PNG"]
 
-    FIRESTORE_KEY_PATH = 'Catalogger/static/catalogger-key'
+    FIRESTORE_KEY_PATH = 'Catalogger/static/catalogger-key.json'
 
 
 
@@ -34,7 +34,7 @@ class TestingConfig(Config):
     IMAGE_UPLOADS = 'SalesTrackerV2/static/Products/'
     IMAGE_THUMBNAIL_UPLOADS = 'SalesTrackerV2/static/Products_Thumbnails/'
     ALLOWED_IMAGE_EXTENSIONS = ["JPEG", "JPG", "PNG"]
-    FIRESTORE_KEY_PATH = 'Catalogger/static/catalogger-key'
+    FIRESTORE_KEY_PATH = 'Catalogger/static/catalogger-key.json'
 
 
 # DB_NAME = "development-db"
