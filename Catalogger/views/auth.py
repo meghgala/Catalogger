@@ -9,13 +9,13 @@ mod = Blueprint('auth', __name__, url_prefix='')
 
 @mod.route("/")
 def login_page():
-    return render_template('auth/basic_elements.html')
+    return render_template('auth/register1.html')
 
 @mod.route("/register_user",methods=["POST"])
 def reg_page():
-    user_id = createStudentAccount(request.form['name'],request.form['email'],request.form['pass'],request.form['bname'],request.form['category'],request.form['own'],)
+    user_id = createStudentAccount(request.form['name'],request.form['email'],request.form['pass'])
     print(user_id)
-    return "success"
+    return render_template('home/index.html')
 
 @mod.route("/changePassword")
 def change_password():

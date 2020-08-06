@@ -10,21 +10,15 @@ firebase_admin.initialize_app(cred)
 
 firestore_client = firestore.client()
 
-def createStudentAccount(name, email_id, password, bname, category, own):
+def createStudentAccount(name, email_id, password):
     user = auth.create_user(
         display_name=name,
         email=email_id,
         email_verified=True,
-        password=password,
-        business_name = bname,
-        category = category,
-        owner = own
+        password=password
     )
     firestore_client.collection('businesses').document(user.uid).set({
         'name': name,
-        'business name': bname,
-        'category': category,
-        'owenedBy': own,
         'uid': user.uid
     })
     print("Created user", user.uid)
