@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, Flask, flash, jsonify, redirect, render_template, request,
+    Blueprint, Flask, flash, jsonify, redirect, render_template,session, request,
     session, url_for)
 
 from helpers.auth import *
@@ -42,6 +42,7 @@ def registerPage():
 def login_user():
     login_id = loginUserAccount(request.form['email'],request.form['pass'])
     if(login_id):
+        session[uid] = userId
         return render_template('home/index.html')
     else:
         flash('Invalid credentials', 'danger')

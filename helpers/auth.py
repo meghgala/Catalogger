@@ -52,14 +52,14 @@ def createBusinessUserAccount(name,email_id, password,bname,category):
     #    return None
 
 def loginUserAccount(email_id, password):
-    try:
+    #try:
         user = auth.signInWithEmailAndPassword(
             email=email_id,
             password=password
         )
         return user.uid
-    except:
-        print("Error")
-        return None
+    #except:
+    #    print("Error")
+    #    return None
     
      
