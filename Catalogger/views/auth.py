@@ -31,6 +31,12 @@ def register_business_user():
     else:
         return redirect("/")
 
+@mod.route("/home")
+def home_page():
+    get_categories = getBusinessInfo('u2TBoGwM59RFU1u5wU7SBeEdZ6t2')
+    print(get_categories)
+    return render_template('home/index.html')
+
 @mod.route("/loginPage")
 def login_page():
     return render_template('auth/login1.html')
@@ -44,24 +50,23 @@ def registerPage():
 def login_user():
     login_id = loginUserAccount(request.form['email'],request.form['pass'])
     if(login_id):
-        #session[uid] = userId
-        get_categories = getBusinessInfo(login_id)
-        return render_template('home/index.html')
+        session['uid'] = login_id
+        return redirect('/home')
     else:
         flash('Invalid credentials', 'danger')
         return redirect("/loginPage")
 
-@mod.route("/changePass",methods=["POST"])
-def change_pass():
-    if 'uid' in session:
-        if changePassword(request.form['curpass'],request.form['newpass'],session['uid']):
-            flash('Password Changed','success')
-            return render_template('auth/changepassword.html',name=session['name'])
-        else:
-            flash('Password Not Changed','danger')
-            return render_template('auth/changepassword.html',name=session['name'])
-    flash('Please Login','danger')
-    return render_template('auth/login.html')
+# @mod.route("/changePass",methods=["POST"])
+# def change_pass():
+#     if 'uid' in session:
+#         if changePassword(request.form['curpass'],request.form['newpass'],session['uid']):
+#             flash('Password Changed','success')
+#             return render_template('auth/changepassword.html',name=session['name'])
+#         else:
+#             flash('Password Not Changed','danger')
+#             return render_template('auth/changepassword.html',name=session['name'])
+#     flash('Please Login','danger')
+#     return render_template('auth/login.html')
 
 @mod.route("/logout")
 def logout_user():

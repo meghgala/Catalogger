@@ -62,12 +62,11 @@ def createBusinessUserAccount(name,email_id, password,bname,category):
 
 def loginUserAccount(email_id, password):
     user = firebase.auth().sign_in_with_email_and_password(email_id, password)
-    print(user['localId'])
     return user
     
 def getBusinessInfo(userId):
-    business_id = firestore_client.collection('businesses').where('ownedBy','==',userId).get()
-    print(business_id)
+    for i in firestore_client.collection('businesses').where('ownedBy','==',userId).get():
+        business_id = i.id
     return business_id
     
 #member_data = firestore_client.collection('users').document(member).get().to_dict()
