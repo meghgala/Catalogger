@@ -67,6 +67,8 @@ def loginUserAccount(email_id, password):
 def getBusinessInfo(userId):
     for i in firestore_client.collection('businesses').where('ownedBy','==',userId).get():
         business_id = i.id
+        # To get Business Name
+        # business_name = i.to_dict()['name']
     return business_id
     
 #member_data = firestore_client.collection('users').document(member).get().to_dict()
