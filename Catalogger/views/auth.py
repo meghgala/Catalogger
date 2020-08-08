@@ -9,6 +9,8 @@ mod = Blueprint('auth', __name__, url_prefix='')
 
 @mod.route("/")
 def register_page():
+    #get_categories = getBusinessInfo('u2TBoGwM59RFU1u5wU7SBeEdZ6t2')
+    #return render_template('home/index.html')
     return render_template('auth/register1.html')
 
 # REGISTER USER ------------------------------------------------------------------------------ 
@@ -42,7 +44,8 @@ def registerPage():
 def login_user():
     login_id = loginUserAccount(request.form['email'],request.form['pass'])
     if(login_id):
-        session[uid] = userId
+        #session[uid] = userId
+        get_categories = getBusinessInfo(login_id)
         return render_template('home/index.html')
     else:
         flash('Invalid credentials', 'danger')

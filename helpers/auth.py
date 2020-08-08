@@ -4,9 +4,18 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import auth
 from firebase_admin import firestore
+import pyrebase
+
+config = {
+        "apiKey": "AIzaSyCvfS9pbQotKpJVtG3nrtIRgChnh99lX4U",
+        "authDomain": "catalogger-68d96.firebaseapp.com",
+        "databaseURL": "https://catalogger-68d96.firebaseio.com",
+        "storageBucket": "catalogger-68d96.appspot.com",
+    }
 
 cred = credentials.Certificate(app.config['FIRESTORE_KEY_PATH'])
 firebase_admin.initialize_app(cred)
+firebase = pyrebase.initialize_app(config)
 
 firestore_client = firestore.client()
 
@@ -52,14 +61,14 @@ def createBusinessUserAccount(name,email_id, password,bname,category):
     #    return None
 
 def loginUserAccount(email_id, password):
-    #try:
-        user = auth.signInWithEmailAndPassword(
-            email=email_id,
-            password=password
-        )
-        return user.uid
-    #except:
-    #    print("Error")
-    #    return None
+    user = firebase.auth().sign_in_with_email_and_password(email_id, password)
+    print(user['localId'])
+    return user
     
-     
+def getBusinessInfo(userId):
+    business_id = firestore_client.collection('businesses').where('ownedBy','==',userId).get()
+    print(business_id)
+    return business_id
+    
+#member_data = firestore_client.collection('users').document(member).get().to_dict()
+    
