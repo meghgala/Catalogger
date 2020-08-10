@@ -33,9 +33,11 @@ def register_business_user():
 
 @mod.route("/home")
 def home_page():
-    get_categories = getBusinessInfo('u2TBoGwM59RFU1u5wU7SBeEdZ6t2')
-    print(get_categories)
-    return render_template('home/index.html')
+    categories = []
+    business_id,categories = getBusinessInfo('u2TBoGwM59RFU1u5wU7SBeEdZ6t2')
+    print('---------------------------')
+    print(categories)
+    return render_template('home/index.html', data = categories)
 
 @mod.route("/loginPage")
 def login_page():

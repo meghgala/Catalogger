@@ -85,16 +85,4 @@ def getBusinessInfo(userId):
             #print(business_sub_category_name)
             i['subcategories'].append({'name':business_sub_category_name,'id':business_sub_category_id})
             #print(i)
-
-    print(categories)
     return business_id,categories 
-
-     
-
-#member_data = firestore_client.collection('users').document(member).get().to_dict()
-
-""" categories = [{'id':'auwgduwd','name':'men','subcategories':[
-                    {'id':'dj3d39d','name':'formal'},
-                    {'id':'dj2ew3d39d','name':'party'}]},
-                  {'id':'338dcf','name':'women','subcategories':[{},{}]}]
-     """
