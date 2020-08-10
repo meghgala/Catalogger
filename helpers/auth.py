@@ -1,4 +1,3 @@
-
 from Catalogger import app
 import firebase_admin
 from firebase_admin import credentials
@@ -65,11 +64,37 @@ def loginUserAccount(email_id, password):
     return user
     
 def getBusinessInfo(userId):
+    category_dict = {}
+    categories = []
     for i in firestore_client.collection('businesses').where('ownedBy','==',userId).get():
         business_id = i.id
-        # To get Business Name
-        # business_name = i.to_dict()['name']
-    return business_id
+        business_name = i.to_dict()['name']
+        business_category = i.to_dict()['category']
     
+    for j in firestore_client.collection('businesses').document(business_id).collection('categories').get():
+        #print(business_category_id)
+        business_category_name = j.to_dict()['name']
+        #print(business_category_name)
+        categories.append({'name':business_category_name,'id':j.id,'subcategories':[]})
+
+    for i in categories:
+        for k in firestore_client.collection('businesses').document(business_id).collection('categories').document(i['id']).collection('subcategories').get():
+            business_sub_category_id = k.id
+            #print(business_sub_category_id)
+            business_sub_category_name = k.to_dict()['name']
+            #print(business_sub_category_name)
+            i['subcategories'].append({'name':business_sub_category_name,'id':business_sub_category_id})
+            #print(i)
+
+    print(categories)
+    return business_id,categories 
+
+     
+
 #member_data = firestore_client.collection('users').document(member).get().to_dict()
-    
+
+""" categories = [{'id':'auwgduwd','name':'men','subcategories':[
+                    {'id':'dj3d39d','name':'formal'},
+                    {'id':'dj2ew3d39d','name':'party'}]},
+                  {'id':'338dcf','name':'women','subcategories':[{},{}]}]
+     """
