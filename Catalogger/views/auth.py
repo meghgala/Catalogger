@@ -35,7 +35,7 @@ def register_business_user():
 def home_page():
     categories = []
     business_id,categories = getBusinessInfo('u2TBoGwM59RFU1u5wU7SBeEdZ6t2')
-    print('---------------------------')
+    print('------------------------------')
     print(categories)
     return render_template('home/index.html', data = categories)
 
