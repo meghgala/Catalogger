@@ -241,17 +241,22 @@
         <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
-            {% for item in data %}
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Category</button>
+            {% for category in categories %}
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#{{item.id}}" aria-expanded="false" aria-controls="{{item.id}}">
+              <a class="nav-link" data-toggle="collapse" href="#{{category.id}}" aria-expanded="false" aria-controls="{{category.id}}">
                 <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
-                <span class="menu-title">{{item.name}}</span>
+                <span class="menu-title">{{category.name}}</span>
                 <i class="menu-arrow"></i>
               </a>
-              <div class="collapse" id="{{item.id}}">
+              <div class="collapse" id="{{category.id}}">
                 <ul class="nav flex-column sub-menu">
-                  {% for i in item.subcategories %}
-                  <li class="nav-item"> <a class="nav-link" href="#{{item.name}}"> {{i.name}} </a></li>
+                  <button type="button" class="btn btn-primary" 
+                    onclick="SubCategoryModal('{{category.id}}')">
+                    Add Sub-Category</button>
+                  {% for subcategory in category.subcategories %}
+                  {% set categoryPath='product/'+category.id+'/'+subcategory.id %}
+                  <li class="nav-item"> <a class="nav-link" onclick="window.location.href='/{{categoryPath}}'"> {{subcategory.name}} </a></li>
                   {% endfor %}
                 </ul>
               </div>
@@ -262,57 +267,82 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
-            <div class="row" id="proBanner">
-              <div class="col-12">
-                <span class="d-flex align-items-center purchase-popup">
-                  <p>Like what you see? Check out our premium version for more.</p>
-                  <a href="https://github.com/BootstrapDash/ConnectPlusAdmin-Free-Bootstrap-Admin-Template" target="_blank" class="btn ml-auto download-button">Download Free Version</a>
-                  <a href="http://www.bootstrapdash.com/demo/connect-plus/jquery/template/" target="_blank" class="btn purchase-button">Upgrade To Pro</a>
-                  <i class="mdi mdi-close" id="bannerClose"></i>
-                </span>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                {% for item in product_list %}
-                <div class="tab-content tab-transparent-content">
-                  <div class="tab-pane fade show active" id="business-1" role="tabpanel" aria-labelledby="business-tab">
-                    <div class="row">
-                      <div class="col-xl-3 col-lg-6 col-sm-6 grid-margin stretch-card">
-                        <div class="card">
-                          <div class="card-body text-center">
-                            <h5 class="mb-2 text-dark font-weight-normal">{{item.name}}</h5>
-                            <h2 class="mb-4 text-dark font-weight-bold">932.00</h2>
-                            <div class="dashboard-progress dashboard-progress-1 d-flex align-items-center justify-content-center item-parent"><i class="mdi mdi-lightbulb icon-md absolute-center text-dark"></i></div>
-                            <p class="mt-4 mb-0">Completed</p>
-                            <h3 class="mb-0 font-weight-bold mt-2 text-dark">5443</h3>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
+            <div class="row" >
+              {% for item in product_list %}
+              <div class="col-lg-3">
+              <div class="card mt-4">
+                <img class="card-img-top" src="{{ url_for('static', filename='images/gow.jpg') }}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{item.name}}</h5>
+                  <h5 class="card-title">{{item.price}}</h5>
+                  <p class="card-text">{{item.description}}</p>
                 </div>
               </div>
+              </div>
               {% endfor %}
-            </div>
           </div>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-          <footer class="footer">
-            <div class="footer-inner-wraper">
-              <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
-              </div>
-            </div>
-          </footer>
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add a category.</h4>
+          </div>
+          <div class="modal-body">
+            <form class="pt-3" name="login" method="POST" action="/category/add_category">
+              <div class="form-group">
+                <input type="text" name="category" class="form-control form-control-lg" id="category" placeholder="Enter category">
+              </div>
+              <div class="mt-3">
+                <input type="submit" value="Submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="myModal2" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add a sub category.</h4>
+          </div>
+          <div class="modal-body">
+            <form class="pt-3" name="login" method="POST" action="/category/add_sub_category">
+              <div class="form-group">
+                <input type="text" name="categoryId" hidden class="form-control form-control-lg" id="categoryId">
+                <input type="text" name="subcategory" class="form-control form-control-lg" id="subcategory" placeholder="Enter sub category">
+              </div>
+              <div class="mt-3">
+                <input type="submit" value="Submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function SubCategoryModal(categoryId) {
+          $(".modal-body #categoryId").val(categoryId);
+          $('#myModal2').modal('show');
+      }
+    </script>
+      
     <script src= "{{ url_for('static', filename='vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->

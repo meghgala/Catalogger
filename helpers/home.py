@@ -15,7 +15,7 @@ config = {
 cred = credentials.Certificate(app.config['FIRESTORE_KEY_PATH'])
 firebase_admin.initialize_app(cred)
 firebase = pyrebase.initialize_app(config)
- 
+
 firestore_client = firestore.client()
 
 def createUserAccount(name, email_id, password):
@@ -57,20 +57,17 @@ def createBusinessUserAccount(name,email_id, password,bname,category):
 
 def loginUserAccount(email_id, password):
     user = firebase.auth().sign_in_with_email_and_password(email_id, password)
-    return user['localId']
+    print(user)
+    return user
     
 def getBusinessInfo(userId):
-    business = {}
-    for i in firestore_client.collection('businesses').where('ownedBy','==',userId).get():
-        business_id = i.id
-        business_name = i.to_dict()['name']   
-        return {'business_name':business_name,'business_id':business_id}
-
-
-def getBusinessCategories(business_id):
     category_dict = {}
     categories = []
-   
+    for i in firestore_client.collection('businesses').where('ownedBy','==',userId).get():
+        business_id = i.id
+        business_name = i.to_dict()['name']
+        business_category = i.to_dict()['category']
+    
     for j in firestore_client.collection('businesses').document(business_id).collection('categories').get():
         business_category_name = j.to_dict()['name']
         categories.append({'name':business_category_name,'id':j.id,'subcategories':[]})
@@ -80,4 +77,4 @@ def getBusinessCategories(business_id):
             business_sub_category_id = k.id
             business_sub_category_name = k.to_dict()['name']
             i['subcategories'].append({'name':business_sub_category_name,'id':business_sub_category_id})
-    return categories 
+    return business_id,categories 
