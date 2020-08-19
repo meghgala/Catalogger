@@ -24,7 +24,7 @@ mod = Blueprint('category', __name__, url_prefix='/category')
 def get_category_details(categoryId,subcategoryId):
     product_list = getProductsInfo(session['business']['business_id'],categoryId,subcategoryId)
     categories = getBusinessCategories(session['business']['business_id'])
-    print(categories)
+    print(product_list)
     return render_template('category/products.html',categoryId=categoryId, subcategoryId=subcategoryId, categories = categories, product_list = product_list)
 
 @mod.route("/add_category",methods=["POST"])
