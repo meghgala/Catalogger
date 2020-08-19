@@ -13,6 +13,7 @@ config = {
     }
 
 cred = credentials.Certificate(app.config['FIRESTORE_KEY_PATH'])
+
 firebase_admin.initialize_app(cred)
 firebase = pyrebase.initialize_app(config)
  

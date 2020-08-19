@@ -305,7 +305,7 @@
               {% for item in product_list %}
               <div class="col-lg-3">
               <div class="card mt-4">
-                <img class="card-img-top" src="{{ url_for('static', filename='images/gow.jpg') }}" alt="Card image cap">
+                <img class="card-img-top" src="{{item.image}}" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">{{item.name}}</h5>
                   <h5 class="card-title">{{item.price}}</h5>
