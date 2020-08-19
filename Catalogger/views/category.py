@@ -45,7 +45,8 @@ def add_sub_category():
 
 @mod.route("/add_products",methods=["POST"])
 def add_products():
-    user_id = addProducts(request.form['categoryId'],request.form['subcategoryId'],request.form['productname'],request.form['productdesc'],request.form['productprice'],session['business']['business_id'])
+    img = request.files.getlist("images")
+    user_id = addProducts(request.form['categoryId'],request.form['subcategoryId'],request.form['productname'],request.form['productdesc'],request.form['productprice'],session['business']['business_id'],img)
     if(user_id):
         return redirect('/home')
     else:
