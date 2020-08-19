@@ -17,9 +17,16 @@ def getProductsInfo(business_id,category_id,sub_category_id):
         product_category_name = k.to_dict()['name']
         product_category_description = k.to_dict()['description']
         product_category_price = k.to_dict()['price']
-        product_list.append({'name':product_category_name,'id':product_category_id,'description':product_category_description,'price':product_category_price})
-        
+        product_list.append({'name':product_category_name,'id':product_category_id,'description':product_category_description,'price':product_category_price})    
     return product_list
+
+def addProducts(category_id,sub_category_id,product_name,product_desc,product_price,business_id):
+    firestore_client.collection('businesses').document(business_id).collection('categories').document(category_id).collection('subcategories').document(sub_category_id).collection('products').add({
+        'name':product_name,
+        'description':product_desc,
+        'price':product_price
+    }) 
+    return True
 
 def addCategory(name,business_id):
     firestore_client.collection('businesses').document(business_id).collection('categories').add({
@@ -27,8 +34,8 @@ def addCategory(name,business_id):
     })
     return True
 
-def addSubCategory(name,business_id):
-    firestore_client.collection('businesses').document(business_id).collection('categories').add({
+def addSubCategory(category_id,name,business_id):
+    firestore_client.collection('businesses').document(business_id).collection('categories').document(category_id).collection('subcategories').add({
         'name':name
     })
     return True
