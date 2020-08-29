@@ -16,6 +16,8 @@ cred = credentials.Certificate(app.config['FIRESTORE_KEY_PATH'])
 
 firebase_admin.initialize_app(cred)
 firebase = pyrebase.initialize_app(config)
+storage = firebase.storage()
+
  
 firestore_client = firestore.client()
 
@@ -37,23 +39,28 @@ def createUserAccount(name, email_id, password):
         print("Error")
         return None
 
-def createBusinessUserAccount(name,email_id, password,bname,category):
+def createBusinessUserAccount(name,email_id, password,bname,bdesc,category,img):
         user = auth.create_user(
-            display_name=bname,
-            email=email_id,
-            email_verified=True,
-            password=password,
+            display_name = bname,
+            email = email_id,
+            email_verified = True,
+            password = password,
         )
         _,b_user = firestore_client.collection('businesses').add({
             'name': bname,
             'category':category,
+            'description': bdesc,
             'ownedBy': user.uid
         })
         firestore_client.collection('users').document(user.uid).set({
             'name': name,
             'ownerOf': b_user.id
         })
-        print(b_user.id)
+        storage.child(b_user.id+'hh.jpg').put(img[0])
+        firestore_client.collection('businesses').document(b_user.id).update({
+        'image': storage.child(b_user.id+'hh.jpg').get_url(None)
+    })
+        print(name,email_id, password,bname,bdesc,category)
         return user.uid
 
 def loginUserAccount(email_id, password):
