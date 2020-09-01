@@ -13,19 +13,13 @@ def loginPage():
     #get_categories = getBusinessInfo('u2TBoGwM59RFU1u5wU7SBeEdZ6t2')
     #return render_template('home/index.html')
     return render_template('auth/login.html')
-    
-@mod.route("/trial")
-def trial():
-    #get_categories = getBusinessInfo('u2TBoGwM59RFU1u5wU7SBeEdZ6t2')
-    #return render_template('home/index.html')
-    return render_template('home/index.html')
 
 # REGISTER USER ------------------------------------------------------------------------------
 @mod.route("/register_user",methods=["POST"])
 def register_user():
     user_id = createUserAccount(request.form['name'],request.form['email'],request.form['pass'])
     if(user_id):
-        return render_template('/home')
+        return redirect('/home')
     else:
         return redirect("/")
 
@@ -35,10 +29,9 @@ def register_business_user():
     img = request.files.getlist("images")
     business_user_id = createBusinessUserAccount(request.form['name'],request.form['email'],request.form['pass'],request.form['bname'],request.form['bdesc'],request.form['getcategory'],img)
     if(business_user_id):
-        return render_template('/trial')
+        return redirect('/home')
     else:
         return redirect("/")
-
 
 @mod.route("/loginPage")
 def login_page():
