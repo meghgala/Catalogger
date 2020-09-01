@@ -74,7 +74,6 @@ def getBusinessInfo(userId):
         business_name = i.to_dict()['name']   
         return {'business_name':business_name,'business_id':business_id}
 
-
 def getBusinessCategories(business_id):
     category_dict = {}
     categories = []
