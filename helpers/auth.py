@@ -88,3 +88,17 @@ def getBusinessCategories(business_id):
             business_sub_category_name = k.to_dict()['name']
             i['subcategories'].append({'name':business_sub_category_name,'id':business_sub_category_id})
     return categories 
+
+def searchProduct(search_key):
+    businesses = []
+    mylist = []
+    for i in firestore_client.collection('businesses').get():
+        business_id = i.id
+        business_name = i.to_dict()['name']
+        business_desc = i.to_dict()['description']
+        business_image = storage.child(business_id+'/'+'hh.jpg').get_url(None)
+        businesses.append({'name':business_name,'id':business_id,'description':business_desc,'image_url':business_image})    
+    for j in businesses:
+        if search_key in j['name']:
+            mylist.append(j) 
+    return mylist

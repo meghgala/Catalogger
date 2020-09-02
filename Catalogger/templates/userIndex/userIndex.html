@@ -29,18 +29,19 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo"><img src= "{{ url_for('static', filename='images/logo.png') }}" alt="logo" /></a>        </div>
+          <a class="navbar-brand brand-logo"><img src= "{{ url_for('static', filename='images/logo.png') }}" alt="logo" /></a>        
+        </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
           <div class="search-field d-none d-xl-block">
-            <form class="d-flex align-items-center h-100" action="#">
+            <form class="d-flex align-items-center h-100" name="search" action="/search" method="POST">
               <div class="input-group">
                 <div class="input-group-prepend bg-transparent">
                   <i class="input-group-text border-0 mdi mdi-magnify"></i>
                 </div>
-                <input type="text" class="form-control bg-transparent border-0" placeholder="Search products">
+                <input type="text" class="form-control bg-transparent border-0" name="search" id="search" placeholder="Search products">
               </div>
             </form>
           </div>
@@ -128,7 +129,7 @@
     <h5 class="card-title" id="title"></h5>
     <script>
       const config = {
-        perView : 2,
+        perView : 1.5,
         gap : 20,
         autoplay : 2000,
         hoverpause : true,
@@ -173,7 +174,7 @@
               +'<div class="card-body">'
               +'<h5 class="card-title" id="title">'+data1["category"][key]["business_name"]+'</h5>'
               +'<h5 class="card-title">'+data1["category"][key]["business_description"]+'</h5>'
-              +'<button type="button" class="btn btn-dark" onclick="window.location.href='+'/business/'+data1['category'][key]['business_id']">Shop</button>'
+              +'<button type="button" class="btn btn-dark" onclick="window.location.href='/business/'+data1['category'][key]['business_id']>Shop</button>'
               +'</div>'
               +'</div>'
               +'</div>';
