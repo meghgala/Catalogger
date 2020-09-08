@@ -96,9 +96,9 @@ def searchProduct(search_key):
         business_id = i.id
         business_name = i.to_dict()['name']
         business_desc = i.to_dict()['description']
-        business_image = storage.child(business_id+'/'+'hh.jpg').get_url(None)
-        businesses.append({'name':business_name,'id':business_id,'description':business_desc,'image_url':business_image})    
+        business_image = i.to_dict()['image']
+        businesses.append({'business_id':business_id,'business_name':business_name,'business_description':business_desc,'business_image':business_image})    
     for j in businesses:
-        if search_key in j['name']:
+        if search_key in j['business_name']:
             mylist.append(j) 
     return mylist

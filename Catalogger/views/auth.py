@@ -27,7 +27,7 @@ def register_business_user():
     img = request.files.getlist("images")
     business_user_id = createBusinessUserAccount(request.form['name'],request.form['email'],request.form['pass'],request.form['bname'],request.form['bdesc'],request.form['getcategory'],img)
     if(business_user_id):
-        return redirect('/home')
+        return redirect('/')
     else:
         return redirect("/")
 
@@ -57,8 +57,9 @@ def login_user():
 
 @mod.route("/search",methods=["POST"])
 def search():
-    search_result = searchProduct(request.form['search'])
-    return render_template('userIndex/userIndex.html',search_result = search_result)
+    search_result = searchProduct(request.get_json()['searchval'])
+    print(search_result)
+    return jsonify({'category':search_result})
 
 @mod.route("/logout")
 def logout_user():
