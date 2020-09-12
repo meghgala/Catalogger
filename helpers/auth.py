@@ -72,7 +72,8 @@ def getBusinessInfo(userId):
     for i in firestore_client.collection('businesses').where('ownedBy','==',userId).get():
         business_id = i.id
         business_name = i.to_dict()['name']   
-        return {'business_name':business_name,'business_id':business_id}
+        business_description = i.to_dict()['description']
+        return {'business_name':business_name,'business_id':business_id,'business_description':business_description}
 
 def getBusinessCategories(business_id):
     category_dict = {}
@@ -99,6 +100,6 @@ def searchProduct(search_key):
         business_image = i.to_dict()['image']
         businesses.append({'business_id':business_id,'business_name':business_name,'business_description':business_desc,'business_image':business_image})    
     for j in businesses:
-        if search_key in j['business_name']:
+        if search_key.lower() in j['business_name'].lower():
             mylist.append(j) 
     return mylist

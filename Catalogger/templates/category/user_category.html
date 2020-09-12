@@ -9,6 +9,7 @@
     <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/css/vendor.bundle.base.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Averia Gruesa Libre' rel='stylesheet'>
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href= "{{ url_for('static', filename='vendors/font-awesome/css/font-awesome.min.css') }}">
@@ -26,36 +27,23 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="/userIndex"><img src= "{{ url_for('static', filename='images/logo.jpg') }}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="/userIndex" style="font-family: 'Averia Gruesa Libre';font-size: 22px;color: rgb(255, 255, 255);" >Catalogger</a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
-          <div class="search-field d-none d-xl-block">
-            <form class="d-flex align-items-center h-100" action="#">
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <i class="input-group-text border-0 mdi mdi-magnify"></i>
-                </div>
-                <input type="text" class="form-control bg-transparent border-0" placeholder="Search products">
-              </div>
-            </form>
-          </div>
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
           </button>
         </div>
       </nav>
-      <!-- partial -->
       <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             {% for category in categories %}
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#{{category.id}}" aria-expanded="false" aria-controls="{{category.id}}">
-                <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
                 <span class="menu-title">{{category.name}}</span>
                 <i class="menu-arrow"></i>
               </a>
@@ -71,7 +59,6 @@
             {% endfor %}
           </ul>
         </nav>
-        <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="row">
@@ -91,13 +78,8 @@
               </div>
               {% endfor %}
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
       </div>
-      <!-- page-body-wrapper ends -->
     </div>
 
     <script src= "{{ url_for('static', filename='vendors/js/vendor.bundle.base.js') }}"></script>

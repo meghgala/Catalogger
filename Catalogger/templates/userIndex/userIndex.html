@@ -15,7 +15,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Connect Plus</title>
+    <title>Catalogger</title>
     <!-- plugins:css -->
     <!-- Required Core Stylesheet -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -41,8 +41,8 @@
       <div class="cta-wrapper">
         <p style="font-family: 'Chewy';font-size: 150px;">Catalogger</p><br>
         <p class="hell" style="font-family: 'Chewy';font-size: 32px;" >"I like turtles."</p><br>
-        <a href="#" style="font-family: 'Chewy';font-size: 20px;" id="default-state-cta" class="active">Login</a>
-        <a href="#" style="font-family: 'Chewy';font-size: 20px;" id="default-state-cta" class="bactive">Signup</a><br>
+        <a href="/loginPage" style="font-family: 'Chewy';font-size: 20px;" id="default-state-cta" class="active">Login</a>
+        <a href="/registerPage" style="font-family: 'Chewy';font-size: 20px;" id="default-state-cta" class="bactive">Signup</a><br>
         <a href="#slider" style="font-family: 'Chewy';font-size: 20px;" id="default-state-cta" class="cactive">Click here to have a look at the types of businesses</a>
       </div>
     </div>
@@ -136,7 +136,7 @@
         name: 'interactive-gradient',
         elToSetClassOn: '.canvas-interactive-wrapper',
         isPausedWhenNotInView: true,
-        stateTransitionSpeed: 300,
+        stateTransitionSpeed: 100,
           states : {
               "default-state": {
                   gradients: [
@@ -202,6 +202,7 @@
           contentType: "application/json;charset=utf-8",
           success: function(data1)
           {
+            console.log(data1);
             document.getElementById("sup").innerHTML = '';
             for(var key in data1['category']) 
             {

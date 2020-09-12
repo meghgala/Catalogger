@@ -2165,6 +2165,13 @@ kbd {
     font-size: 100%;
     font-weight: 700; }
 
+.stupid{
+    max-width:250px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+}
+
 pre {
   display: block;
   font-size: 87.5%;

@@ -27,35 +27,7 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" style="font-family: 'Averia Gruesa Libre';font-size: 22px" href="/userIndex">Catalogger</a>        
-        </div>
-        <div class="navbar-menu-wrapper d-flex align-items-stretch">
-          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span>
-          </button>
-          <div class="search-field d-none d-xl-block">
-            <form class="d-flex align-items-center h-100" name="search" action="/search" method="POST">
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <i class="input-group-text border-0 mdi mdi-magnify"></i>
-                </div>
-                <input type="text" class="form-control bg-transparent border-0" name="search" id="search" placeholder="Search products">
-              </div>
-            </form>
-          </div>
-          <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item nav-profile dropdown">
-              <div class="dropdown-menu navbar-dropdown dropdown-menu-right p-0 border-0 font-size-sm" aria-labelledby="profileDropdown" data-x-placement="bottom-end">
-                <div class="p-3 text-center bg-primary">
-                  <img class="img-avatar img-avatar48 img-avatar-thumb" src="assets/images/faces/face28.png" alt="">
-                </div>
-              </div>
-            </li>
-            </li>
-          </ul>
-          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-            <span class="mdi mdi-menu"></span>
-          </button>
+          <a class="navbar-brand brand-logo" style="font-family: 'Averia Gruesa Libre';font-size: 22px;color: rgb(255, 255, 255);" href="/userIndex">Catalogger</a>        
         </div>
       </nav> 
       <!-- partial -->
@@ -67,7 +39,7 @@
             {% for category in categories %}
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#{{category.id}}" aria-expanded="false" aria-controls="{{category.id}}">
-                <span class="icon-bg"><i class="mdi mdi-lock menu-icon"></i></span>
+               
                 <span class="menu-title">{{category.name}}</span>
                 <i class="menu-arrow"></i>
               </a>
@@ -84,6 +56,7 @@
               </div>
             </li>
             {% endfor %}
+            <button type="button" class="btn btn-primary" href="/loginPage">Log Out</button>
           </ul>
         </nav>
         <!-- partial -->
@@ -116,27 +89,22 @@
         </div>
         <div class="main-panel">
           <div class="content-wrapper">
-            <div class="row">
-              {% for item in product_list %}
-              <div class="col-lg-3">
-              <div class="card mt-4">
-                <img class="card-img-top" src="{{item.image}}" alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{item.name}}</h5>
-                  <h5 class="card-title">{{item.price}}</h5>
-                  <p class="card-text">{{item.description}}</p>
+            <div class="container" style="background-color: black; height: 30vh ;">
+              <div class="row">
+                <div class="col-12"><h5></h5></div>
+                <div class="col-12"><h5></h5></div>
+                <div class="col-12"><h5></h5></div>
+                <div class="col-12"><h5></h5></div>
+                <div class="col-12" style="padding-left: 35px; padding-bottom: 15px;">
+                  <h1>{{bname}}</h1>
+                </div>
+                <div class="col-12" style="padding-left: 35px;">
+                  <p>{{bdesc}}</p>
                 </div>
               </div>
-              </div>
-              {% endfor %}
+            </div>
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
-          <!-- partial -->
         </div>
-        <!-- main-panel ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
     </div>
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
